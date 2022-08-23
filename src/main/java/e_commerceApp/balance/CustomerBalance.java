@@ -17,19 +17,25 @@ public class CustomerBalance extends Balance{
     }
 
     public static CustomerBalance findCustomerBalance(UUID customerId) {
-        // todo convert this block to stream
-        for (Balance customerBalance : CUSTOMER_BALANCE_LIST) {
-            if (customerBalance.getCustomerId().equals(customerId)) {
-                return (CustomerBalance) customerBalance;
-            }
-        }
+//        for (Balance customerBalance : CUSTOMER_BALANCE_LIST) {
+//            if (customerBalance.getCustomerId().equals(customerId)) {
+//                return (CustomerBalance) customerBalance;
+//            }
+//        }
+//
+//        CustomerBalance customerBalance = new CustomerBalance(customerId, 0d);
+//        CUSTOMER_BALANCE_LIST.add(customerBalance);
+//
+//        return customerBalance;
 
-        CustomerBalance customerBalance = new CustomerBalance(customerId, 0d);
-        CUSTOMER_BALANCE_LIST.add(customerBalance);
-
-        return customerBalance;
-
-        return CUSTOMER_BALANCE_LIST.stream()
-                .filter()
+        return (CustomerBalance) CUSTOMER_BALANCE_LIST.stream()
+                .filter(balance -> balance.getCustomerId().equals(customerId))
+                .findFirst().orElseGet(
+                        () -> {
+                            CustomerBalance customerBalance = new CustomerBalance(customerId, 0d);
+                            CUSTOMER_BALANCE_LIST.add(customerBalance);
+                            return customerBalance;
+                        }
+                );
     }
 }

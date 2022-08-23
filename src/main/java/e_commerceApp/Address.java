@@ -38,12 +38,17 @@ public class Address {
 
     public static void printAddressByCustomerId(Customer customer) {
         if (!customer.getAddress().isEmpty()) {
-            // todo convert for loop to forEach()
-            for (Address address : customer.getAddress()) {
-                System.out.println(" Street Name: " + address.getStreetName() +
-                        " Street Number: " + address.getStreetNumber() + "ZipCode:  "
-                        + address.getZipCode() + " State: " + address.getState());
-            }
+//            for (Address address : customer.getAddress()) {
+//                System.out.println(" Street Name: " + address.getStreetName() +
+//                        " Street Number: " + address.getStreetNumber() + "ZipCode:  "
+//                        + address.getZipCode() + " State: " + address.getState());
+//            }
+
+            customer.getAddress().forEach(
+                    address -> System.out.println(" Street Name: " + address.getStreetName() +
+                            " Street Number: " + address.getStreetNumber() + "ZipCode:  "
+                            + address.getZipCode() + " State: " + address.getState())
+            );
         } else {
             System.out.println("You don't have an address yet");
         }

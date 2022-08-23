@@ -18,7 +18,6 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Select Customer:");
-        // todo convert for loop to forEach()
 //        for (int i = 0; i < CUSTOMER_LIST.size(); i++) {
 //            System.out.println("Type " + i + " for customer:" + CUSTOMER_LIST.get(i).getUserName());
 //        }

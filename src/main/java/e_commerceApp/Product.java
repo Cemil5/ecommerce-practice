@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.UUID;
 
+import static e_commerceApp.StaticConstants.CATEGORY_LIST;
 import static e_commerceApp.StaticConstants.PRODUCT_LIST;
 
 public class Product {
@@ -55,43 +56,54 @@ public class Product {
         return categoryId;
     }
 
-    public String getCategoryName() throws Exception {
-        // todo convert this block to stream
-        for (Category category : StaticConstants.CATEGORY_LIST) {
-            // if(getCategoryId().toString().equals(category.getId().toString())){
-            if (getCategoryId().equals(category.getId())) {
-                return category.getName();
-            }
-        }
-        throw new Exception("Category not found," + getName());
+    public String getCategoryName() {
+//        for (Category category : StaticConstants.CATEGORY_LIST) {
+//            // if(getCategoryId().toString().equals(category.getId().toString())){
+//            if (getCategoryId().equals(category.getId())) {
+//                return category.getName();
+//            }
+//        }
+//        throw new Exception("Category not found," + getName());
+        return CATEGORY_LIST.stream()
+                .filter(category -> category.getId().equals(getCategoryId()))
+              //  .map(category -> category.getName())
+                .map(Category::getName)
+                .findFirst().orElseThrow( () -> new RuntimeException("Category not found," + getName()));
     }
 
-    public LocalDateTime getDeliveryDueDate() throws Exception {
-        // todo convert this block to stream
-        for (Category category : StaticConstants.CATEGORY_LIST) {
-       //     if (getCategoryId().toString().equals(category.getId().toString())) {
-            if (getCategoryId().equals(category.getId())) {
-                return category.findDeliveryDueDate();
-            }
-        }
-        throw new Exception("Category could not find");
+    public LocalDateTime getDeliveryDueDate() {
+//        for (Category category : StaticConstants.CATEGORY_LIST) {
+//       //     if (getCategoryId().toString().equals(category.getId().toString())) {
+//            if (getCategoryId().equals(category.getId())) {
+//                return category.findDeliveryDueDate();
+//            }
+//        }
+//        throw new Exception("Category could not find");
+       return CATEGORY_LIST.stream()
+                .filter(category -> category.getId().equals(getCategoryId()))
+             //   .map(category -> category.findDeliveryDueDate())
+                .map(Category::findDeliveryDueDate)
+                .findFirst().orElseThrow( () -> new RuntimeException(""));
     }
 
     public static void updateProductStock(Map<Product, Integer> map) {
-        // todo convert for loop to forEach()
-        for (Product product : map.keySet()) {
-            product.setRemainingStock(product.getRemainingStock() - map.get(product));
-        }
+//        for (Product product : map.keySet()) {
+//            product.setRemainingStock(product.getRemainingStock() - map.get(product));
+//        }
+        map.keySet().forEach(
+                (product -> product.setRemainingStock(product.getRemainingStock() - map.get(product))));
     }
 
     public static Product findProductById(String productId) throws Exception {
-        // todo convert this block to stream
-        for (Product product : PRODUCT_LIST) {
-            if (product.getId().toString().equals(productId)) {
-                return product;
-            }
-        }
-        throw new Exception("Product not found");
+//        for (Product product : PRODUCT_LIST) {
+//            if (product.getId().toString().equals(productId)) {
+//                return product;
+//            }
+//        }
+//        throw new Exception("Product not found");
+        return PRODUCT_LIST.stream()
+                .filter(product -> product.getId().toString().equals(productId))
+                .findFirst().orElseThrow(() -> new Exception("Product not found"));
     }
 
     @Override

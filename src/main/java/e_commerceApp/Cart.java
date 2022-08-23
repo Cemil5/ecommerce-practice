@@ -21,12 +21,15 @@ public class Cart {
     }
 
     public Double calculateCartTotalAmount(){
-        // todo convert this block to stream
-        double totalAmount=0;
-        for(Product product : productMap.keySet()){
-            totalAmount += product.getPrice() * productMap.get(product);
-        }
-        return totalAmount;
+//        double totalAmount=0;
+//        for(Product product : productMap.keySet()){
+//            totalAmount += product.getPrice() * productMap.get(product);
+//        }
+//        return totalAmount;
+       return productMap.keySet().stream()
+                .map(product -> product.getPrice() * productMap.get(product))
+           //     .reduce( (a, b) -> a+b).orElseThrow(() -> new RuntimeException("total amount cannot be calculated"));
+                .reduce(Double::sum).orElseThrow(() -> new RuntimeException("total amount cannot be calculated"));
     }
 
     public Customer getCustomer() {

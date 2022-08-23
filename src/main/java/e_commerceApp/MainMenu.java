@@ -2,7 +2,6 @@ package e_commerceApp;
 
 import e_commerceApp.balance.CustomerBalance;
 import e_commerceApp.balance.GiftCardBalance;
-import e_commerceApp.category.Category;
 import e_commerceApp.discount.Discount;
 import e_commerceApp.order.OrderService;
 import e_commerceApp.order.OrderServiceImpl;
@@ -32,28 +31,38 @@ public class MainMenu {
 
             switch (menuSelection) {
                 case 0: //list categories
-                    // todo convert for loop to forEach()
-                    for (Category category : CATEGORY_LIST) {
-                        System.out.println("Category Code:" + category.generateCategoryCode() + " category name:" + category.getName());
-                    }
+//                    for (Category category : CATEGORY_LIST) {
+//                        System.out.println("Category Code:" + category.generateCategoryCode() + " category name:" + category.getName());
+//                    }
+                    CATEGORY_LIST.forEach(category ->
+                            System.out.println("Category Code:" + category.generateCategoryCode() + " category name:" + category.getName()));
                     break;
 
                 case 1: //list products  //product name, product category name
-                    try {
-                        // todo convert for loop to forEach()
-                        for (Product product : PRODUCT_LIST) {
+//                    try {
+//                        for (Product product : PRODUCT_LIST) {
+//                            System.out.println("Product Name:" + product.getName() + "Product Category Name: " + product.getCategoryName());
+//                        }
+//
+//                    } catch (Exception e) {
+//                        System.out.println("Product could not printed because category not found for product name: " + e.getMessage().split(",")[1]);
+//                    }
+                    PRODUCT_LIST.forEach(product ->
+                    {
+                        try {
                             System.out.println("Product Name:" + product.getName() + "Product Category Name: " + product.getCategoryName());
+                        } catch (Exception e) {
+                            System.out.println("Product could not printed because category not found for product name: " + e.getMessage().split(",")[1]);
                         }
-                    } catch (Exception e) {
-                        System.out.println("Product could not printed because category not found for product name: " + e.getMessage().split(",")[1]);
-                    }
+                    });
                     break;
 
                 case 2: //list discounts
-                    // todo convert for loop to forEach()
-                    for (Discount discount : DISCOUNT_LIST) {
-                        System.out.println("Discount Name: " + discount.getName() + "  discount threshold amount: " + discount.getThresholdAmount());
-                    }
+//                    for (Discount discount : DISCOUNT_LIST) {
+//                        System.out.println("Discount Name: " + discount.getName() + "  discount threshold amount: " + discount.getThresholdAmount());
+//                    }
+                    DISCOUNT_LIST.forEach(discount ->
+                            System.out.println("Discount Name: " + discount.getName() + "  discount threshold amount: " + discount.getThresholdAmount()));
                     break;
 
                 case 3:  // See Balance
@@ -98,10 +107,11 @@ public class MainMenu {
                     }
                     while (true) {
                         System.out.println("Which product you want to add to your cart? Type 'exit' to continue without adding new item");
-                        // todo convert for loop to forEach()
-                        for (Product product : PRODUCT_LIST) {
-                            System.out.println(product);
-                        }
+//                        for (Product product : PRODUCT_LIST) {
+//                            System.out.println(product);
+//                        }
+                    //    PRODUCT_LIST.forEach(product -> System.out.println(product));
+                        PRODUCT_LIST.forEach(System.out::println);
                         String productId = scanner.next();
                         if (productId.equalsIgnoreCase("exit")) {      // added after live session
                             break;
@@ -150,11 +160,14 @@ public class MainMenu {
                 case 7:     // See Cart
                     if (cart.getProductMap() != null) {  // modified from !cart.getProductMap().keySet().isEmpty()
                         System.out.println("Your Cart: ");
-                        // todo convert for loop to forEach()
-                        for (Product product : cart.getProductMap().keySet()) {
-                            System.out.println("product name: " + product.getName() + " count: " + cart.getProductMap().get(product)
-                                    + " total price: " + product.getPrice() * cart.getProductMap().get(product));   // added after live session
-                        }
+//                        for (Product product : cart.getProductMap().keySet()) {
+//                            System.out.println("product name: " + product.getName() + " count: " + cart.getProductMap().get(product)
+//                                    + " total price: " + product.getPrice() * cart.getProductMap().get(product));   // added after live session
+//                        }
+                        cart.getProductMap().keySet().forEach(product ->
+                                System.out.println("product name: " + product.getName() + " count: " + cart.getProductMap().get(product)
+                                        + " total price: " + product.getPrice() * cart.getProductMap().get(product))
+                        );
                     } else {
                         System.out.println("Your cart is empty");
                     }

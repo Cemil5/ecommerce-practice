@@ -1,5 +1,7 @@
 package e_commerceApp.balance;
 
+import e_commerceApp.StaticConstants;
+
 import java.util.UUID;
 
 import static e_commerceApp.StaticConstants.GIFT_CARD_BALANCE_LIST;
@@ -19,16 +21,26 @@ public class GiftCardBalance extends Balance{
     }
 
     public static GiftCardBalance findGiftCardBalance(UUID customerId) {
-        // todo convert this block to stream
-        for (Balance giftCarBalance : GIFT_CARD_BALANCE_LIST) {
-            if (giftCarBalance.getCustomerId().equals(customerId)) {
-                return (GiftCardBalance) giftCarBalance;
-            }
-        }
+//        for (Balance giftCarBalance : GIFT_CARD_BALANCE_LIST) {
+//            if (giftCarBalance.getCustomerId().equals(customerId)) {
+//                return (GiftCardBalance) giftCarBalance;
+//            }
+//        }
+//
+//        GiftCardBalance giftCarBalance = new GiftCardBalance(customerId, 0d);
+//        GIFT_CARD_BALANCE_LIST.add(giftCarBalance);
+//
+//        return giftCarBalance;
 
-        GiftCardBalance giftCarBalance = new GiftCardBalance(customerId, 0d);
-        GIFT_CARD_BALANCE_LIST.add(giftCarBalance);
+        return (GiftCardBalance) GIFT_CARD_BALANCE_LIST.stream()
+                .filter(balance -> balance.getCustomerId().equals(customerId))
+                .findFirst().orElseGet(
+                        () -> {
+                            GiftCardBalance giftCarBalance = new GiftCardBalance(customerId, 0d);
+                            StaticConstants.GIFT_CARD_BALANCE_LIST.add(giftCarBalance);
 
-        return giftCarBalance;
+                            return giftCarBalance;
+                        }
+                );
     }
 }
