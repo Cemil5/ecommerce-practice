@@ -28,5 +28,8 @@ public class CustomerBalance extends Balance{
         CUSTOMER_BALANCE_LIST.add(customerBalance);
 
         return customerBalance;
+
+        return CUSTOMER_BALANCE_LIST.stream()
+                .filter()
     }
 }

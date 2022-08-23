@@ -19,9 +19,11 @@ public class Main {
 
         System.out.println("Select Customer:");
         // todo convert for loop to forEach()
-        for (int i = 0; i < CUSTOMER_LIST.size(); i++) {
-            System.out.println("Type " + i + " for customer:" + CUSTOMER_LIST.get(i).getUserName());
-        }
+//        for (int i = 0; i < CUSTOMER_LIST.size(); i++) {
+//            System.out.println("Type " + i + " for customer:" + CUSTOMER_LIST.get(i).getUserName());
+//        }
+        AtomicInteger i = new AtomicInteger();
+        CUSTOMER_LIST.forEach( customer -> System.out.println("Type " + i.getAndIncrement() + " for customer:" + customer.getUserName()));
 
         Customer customer = CUSTOMER_LIST.get(scanner.nextInt());
 
