@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.cydeo.service.Implementation_Solutions.*;
 
+import static com.cydeo.service.Implementation.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ImplementationTest {
