@@ -1,7 +1,13 @@
 package lambda_sort_doublecolon_tasks.solutions;
 
 
+import lambda_sort_doublecolon_tasks.Company;
+import lambda_sort_doublecolon_tasks.Employee;
+
+import java.util.Comparator;
+
 import static lambda_sort_doublecolon_tasks.DataGenerator.*;
+import static lambda_sort_doublecolon_tasks.Service.getAllEmployees;
 
 public class MeetingPractice_Solutions {
 
@@ -257,6 +263,7 @@ public class MeetingPractice_Solutions {
 
 
         //System.out.println("***sort all employees with their gender in ascending order and then with their name in descending order***");
+
 //        System.out.println("**************** solution with list.sort() + Comparator & Comparable interface **************");
 //        getAllEmployees().sort(Comparator.comparing(Employee::getGender)
 //                .thenComparing(Comparator.comparing(Employee::getFullName).reversed()));
@@ -284,7 +291,7 @@ public class MeetingPractice_Solutions {
 
 
         //System.out.println("***sort all employees with their company name in descending order and then with their full name in ascending order***");
-        // this task cannot be solved similar to previous sorting tasks, we need to use twe compareTo method
+        // this task cannot be solved similar to previous sorting tasks, we need to use two compareTo method
 
 //        System.out.println("**************** solution with list.sort() + Comparator + Comparable interface **************");
 //        getAllEmployees().sort((e1, e2) -> {
@@ -300,5 +307,7 @@ public class MeetingPractice_Solutions {
 //                    return res != 0 ? res : e1.getFullName().compareTo(e2.getFullName());
 //                })
 //                .forEach(employee -> System.out.println(employee.getCompany().getCompanyName() + " | " + employee.getFullName()));
+
+
     }
 }

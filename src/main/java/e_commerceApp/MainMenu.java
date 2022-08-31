@@ -33,9 +33,9 @@ public class MainMenu {
             switch (menuSelection) {
                 case 0: //list categories
                     // todo convert for loop to forEach()
-//                    for (Category category : CATEGORY_LIST) {
-//                        System.out.println("Category Code:" + category.generateCategoryCode() + " category name:" + category.getName());
-//                    }
+                    for (Category category : CATEGORY_LIST) {
+                        System.out.println("Category Code:" + category.generateCategoryCode() + " category name:" + category.getName());
+                    }
 
                     break;
 
