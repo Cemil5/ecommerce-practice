@@ -99,7 +99,7 @@ public class MainMenu {
                     }
                     while (true) {
                         System.out.println("Which product you want to add to your cart? Type 'exit' to continue without adding new item");
-                        // todo convert for loop to forEach()
+                        // TODO convert for loop to forEach()
                         for (Product product : PRODUCT_LIST) {
                             System.out.println(product);
                         }
